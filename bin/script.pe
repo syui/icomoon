@@ -1,35 +1,46 @@
 #!/usr/bin/fontforge -script
 
-# 新しいフォント名
-family = "ricomoon"
+##大きさを変更しないと合わない
+#icomoon Scale(80, 80, 0, 0)
+#awesome Scale(100, 100, 0, 0)
 
-Open("../bower_components/font-awesome/fonts/FontAwesome.otf")
+Open("./font/icomoon.ttf")
 SelectAll()
 foreach
-  Scale(50, 50, 0, 0) #横1.3倍、縦2倍
+  Scale(80, 80, 0, 0)
 endloop
-# 別ファイルとして保存
-Generate("icomoon-scaled.ttf")
-#Generate("temp.ttf", "", 0x14) # 0x14は適当、、
+Generate("./font/i.ttf")
 Close()
 
+Open("./font/awesome-a.ttf")
+SelectAll()
+foreach
+  Scale(150, 150, 0, 0)
+endloop
+Generate("./font/aa.ttf")
+Close()
 
-#Close()
+Open("./font/awesome-b.ttf")
+SelectAll()
+foreach
+  Scale(150, 150, 0, 0)
+endloop
+Generate("./font/ab.ttf")
+Close()
 
-Open("../fonts/Ricomoon.ttf")
+family = "ricomoon"
+Open("./font/ricty.ttf")
+MergeFonts("./font/aa.ttf")
+MergeFonts("./font/ab.ttf")
+MergeFonts("./font/i.ttf")
+SetFontNames(family, family, family, "Regular")
+Generate(family + ".ttf")
+Close()
+
+#MergeFonts("./font/octicon.ttf")
 
 # 横幅を縮小する処理
 #SelectWorthOutputting()
 #Scale(75,100)
 #SetWidth(1)
 #SelectNone()
-
-# 高さを揃えたIPAゴシックをマージ
-#MergeFonts("icomoon.ttf")
-MergeFonts("icomoon-scaled.ttf")
-
-#フォント名等を指定して保存
-SetFontNames(family, family, family, "Regular")
-Generate(family + ".ttf")
-
-Close()
